@@ -18,11 +18,38 @@ real-time-ai-fraud-detection/
 └── models/         # trained model artifacts
 ```
 
-## Quick start
+## Local setup
 
-1. Copy environment variables: `cp .env.example .env`
-2. Install dependencies: `pip install -r requirements.txt`
-3. Run services: `docker compose up`
+This project requires **Python 3.12**.
+
+### Windows (PowerShell)
+
+```powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m pytest -q
+python -m uvicorn src.api.main:app --reload
+```
+
+### POSIX (macOS / Linux)
+
+```bash
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m pytest -q
+python -m uvicorn src.api.main:app --reload
+```
+
+With the API running, open:
+
+- Health check: http://127.0.0.1:8000/health
+- Interactive docs: http://127.0.0.1:8000/docs
+
+`GET /health` should return `{"status": "ok"}`.
 
 ## Pipeline
 
